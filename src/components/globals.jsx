@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components"
 const Globals = createGlobalStyle`
     html {
         line-height: 1.15; 
-        -webkit-text-size-adjust: 100%; 
+        -webkit-text-size-adjust: 100%;
     }
     
     body {
@@ -158,3 +158,5 @@ const Globals = createGlobalStyle`
         display: none;
     }
 `
+
+export default Globals
