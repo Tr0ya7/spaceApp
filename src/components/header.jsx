@@ -4,7 +4,7 @@ import TextField from "./textField"
 const HeaderStyle = styled.header`
     padding: 60px 0;
     display: flex;
-    justify-content: space-beetwen;
+    justify-content: space-between;
     
     img {
         max-width: 212px;
@@ -14,7 +14,9 @@ const HeaderStyle = styled.header`
 function Header() {
     return (
         <HeaderStyle>
-            <img src="/images/logo.png" alt="logo" />
+            <a href="/">
+                <img src="/images/logo.png" alt="logo" />
+            </a>
             <TextField />
         </HeaderStyle>
     )
