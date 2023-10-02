@@ -5,9 +5,10 @@ import Header from "./components/header"
 import SideBar from "./components/sideBar"
 import banner from '../public/images/banner.png'
 import Pics from '../json/fotos.json'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Gallery from "./components/gallery"
 import Maximized from "./components/maximized"
+import Footer from "./components/footer"
 
 const GradientBackground = styled.div`
   background: linear-gradient(174.61deg, #041833 4.16%, #04244f 48%, #154580 96.76%);
@@ -35,10 +36,35 @@ const Section = styled.section`
 function App() {
   const [picsInPhotos, setPicsInPhotos] = useState(Pics)
   const[selectedPic, setSelectedPic] = useState(null)
+  const [filter, setFilter] = useState('')
+  const [tag, setTag] = useState(0)
   
   function onToggleFavorite(pic) {
-    console.log(pic)
+    if (pic.id === selectedPic?.id) {
+      setSelectedPic({
+        ...selectedPic,
+        favorite: !selectedPic.favorite
+      })
+    }
+
+    setPicsInPhotos(picsInPhotos.map(picInGallerySelected => {
+      return {
+        ...picInGallerySelected,
+        favorite: picInGallerySelected.id === pic.id ? !pic.favorite : picInGallerySelected.favorite
+      }
+    }))
   }
+
+  useEffect(() => {
+    const filterPics = Pics.filter(pic => {
+      const filterByTags = !tag || pic.tagId === tag;
+      const filterByTitle = !filter || pic.titulo.toLowerCase().includes(filter.toLowerCase())
+
+      return filterByTags && filterByTitle
+    })
+
+    setPicsInPhotos(filterPics)
+  }, [filter, tag])
 
   return (
     <GradientBackground>
@@ -59,7 +85,12 @@ function App() {
           </Section>
         </Main>
       </Div>
-      <Maximized pic={ selectedPic } />
+      <Maximized 
+        pic={ selectedPic } 
+        onClose={() => setSelectedPic(null)} 
+        onToggleFavorite={ onToggleFavorite }
+      />
+      <Footer />
     </GradientBackground>
   )
 }

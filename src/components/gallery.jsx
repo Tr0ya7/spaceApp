@@ -23,10 +23,10 @@ const ImageContainer = styled.section`
     gap: 24px;
 `
 
-function Gallery({ value = [], photoSelected, onToggleFavorite }) { //foi declarado o valor inicial de um array vazio para não gerar erros no console
+function Gallery({ value = [], setTag, photoSelected, onToggleFavorite }) { //foi declarado o valor inicial de um array vazio para não gerar erros no console
     return (
         <>
-            <Tags />
+            <Tags setTag={setTag} />
             <Div>
                 <Section>
                     <Title>
@@ -34,7 +34,7 @@ function Gallery({ value = [], photoSelected, onToggleFavorite }) { //foi declar
                     </Title>
                     <ImageContainer>
                         { value.map(pic => <Image 
-                                            key={ pic.id } 
+                                            key={ pic.id }
                                             pic={ pic } 
                                             onMaximize={ photoSelected }
                                             onToggleFavorite={ onToggleFavorite }

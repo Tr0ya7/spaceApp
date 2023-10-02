@@ -1,9 +1,9 @@
 import { styled } from 'styled-components'
-import { AiOutlineHeart } from 'react-icons/ai'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { LuMaximize2 } from 'react-icons/lu'
 
 const Figure = styled.figure`
-    width: ${props => props.$maximized ? '90%' : '220.51px'};
+    width: ${props => props.$maximized ? '90%' : '330px'};
     max-width: 100%;
     margin: 0;
     display: flex;
@@ -49,6 +49,12 @@ const Footer = styled.footer`
 `
 
 function Image({ pic, maximized = false, onToggleFavorite, onMaximize }) {
+    const favIcon = pic.favorite ? <AiFillHeart 
+                                    onClick={ () => onToggleFavorite(pic) } 
+                                   /> : <AiOutlineHeart 
+                                            onClick={ () => onToggleFavorite(pic) } 
+                                        />
+    
     return (
         <Figure $maximized={ maximized } id={`pic-${ pic.id }`}>
             <img src={ pic.path } alt={ pic.alt } />
@@ -60,7 +66,7 @@ function Image({ pic, maximized = false, onToggleFavorite, onMaximize }) {
                     <h4>
                         { pic.fonte }
                     </h4>
-                    <AiOutlineHeart onClick={ () => onToggleFavorite(pic) } />
+                    {favIcon}
                     { !maximized && <LuMaximize2 aria-hidden={ maximized } onClick={() => onMaximize(pic)} /> }
                 </Footer>
             </figcaption>

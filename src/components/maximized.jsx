@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import Image from "./image"
+import { AiOutlineClose } from 'react-icons/ai'
 
 const Overlay = styled.div`
     background-color: rgba(0, 0, 0, .7);
@@ -25,20 +26,23 @@ const Dialog = styled.dialog`
             position: relative;
             top: 20px;
             right: 60px;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
     }
 `
 
-function Maximized({ pic }) {
+function Maximized({ pic, onClose, onToggleFavorite }) {
     return (
         <>
             {pic && <>
                 <Overlay />
-                <Dialog open={ !!pic }>
-                    <Image pic={ pic } maximized={true} />
+                <Dialog open={ !!pic } onClose={ onClose }>
+                    <Image pic={ pic } maximized={true} onToggleFavorite={ onToggleFavorite } />
                     <form method="dialog">
                         <button>
-                            Ok
+                            <AiOutlineClose color="white" />
                         </button>
                     </form>
                 </Dialog>

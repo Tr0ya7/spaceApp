@@ -36,14 +36,14 @@ const Div = styled.div`
     justify-content: end;
 `
 
-function Tags() {
+function Tags({ setTag }) {
     return (
         <Section>
             <H3>
                 Busque por tags:
             </H3>
             <Div>
-                { tags.map(tag => <Button key={tag.id}>
+                { tags.map(tag => <Button key={tag.id} onClick={() => setTag(tag.tag)}>
                                     <H3>
                                         {tag.titulo}
                                     </H3>

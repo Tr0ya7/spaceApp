@@ -29,11 +29,15 @@ const Img = styled.img`
     height: 38px;
 `
 
-function TextField() {
+function TextField({ setFilter }) {
     return (
         <Div>
-            <Input />
-            <Img src={ search } alt="" />
+            <Input 
+                onChange={(event) => {setFilter(event.target.value)}}
+                type="text" 
+                placeholder="O que você procura?" 
+            />
+            <Img src={search} alt="search" />
         </Div>
     )
 }
